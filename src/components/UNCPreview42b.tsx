@@ -6,146 +6,125 @@ interface UNCPreview42bProps {
 }
 
 const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
-  const val = (v: string, fallbackLen = 30) =>
-    v ? <span className="font-medium">{v}</span> : <span className="text-gray-400">{"·".repeat(fallbackLen)}</span>;
+  const val = (v: string, len = 30) =>
+    v || <span className="text-gray-300">{"·".repeat(len)}</span>;
 
   return (
     <div
-      className="w-[210mm] h-[297mm] bg-white text-black mx-auto shadow-lg print:shadow-none relative overflow-hidden"
+      className="w-[210mm] h-[297mm] bg-white text-black mx-auto shadow-lg print:shadow-none"
       style={{ fontFamily: "'Times New Roman', serif", fontSize: "13px" }}
     >
-      <div className="px-[18mm] py-[12mm] h-full flex flex-col">
-        {/* Mẫu số top-right */}
-        <div className="text-right text-[11px] italic mb-0">
-          Mẫu số: C42b-NHPT
+      <div className="px-[15mm] py-[10mm] h-full flex flex-col">
+        {/* Mẫu số */}
+        <div className="text-right text-[11px] italic">Mẫu số: C42b-NHPT</div>
+
+        {/* Title */}
+        <div className="text-center -mt-0.5">
+          <h1 className="text-[18px] font-bold tracking-[3px]">ỦY NHIỆM CHI</h1>
         </div>
 
-        {/* Title row */}
-        <div className="flex items-start">
-          <div className="w-[80px]" />
-          <div className="flex-1 text-center -mt-1">
-            <h1 className="text-[17px] font-bold tracking-[3px] mb-0.5">ỦY NHIỆM CHI</h1>
-          </div>
-          <div className="text-[13px] pt-1 whitespace-nowrap">
-            Số UNC: <span className="inline-block min-w-[80px] border-b border-black text-center">{data.soUNC}</span>
-          </div>
+        {/* Số UNC */}
+        <div className="text-right -mt-5 text-[13px]">
+          Số UNC: {val(data.soUNC, 12)}
         </div>
 
-        {/* Subtitle + date with logo */}
-        <div className="flex items-start mt-0">
-          <div className="w-[80px] flex flex-col items-center">
-            <img src={vdbLogo} alt="VDB" className="w-[60px] h-[60px] object-contain" />
+        {/* Logo + subtitle + date */}
+        <div className="flex items-start mt-1">
+          <div className="w-[75px] flex flex-col items-center">
+            <img src={vdbLogo} alt="VDB" className="w-[56px] h-[56px] object-contain" />
+            <span className="text-[8px] italic text-gray-400">Biểu tượng</span>
           </div>
           <div className="flex-1 text-center">
             <p className="text-[13px]">Chuyển khoản, chuyển tiền thư, điện</p>
-            <p className="text-[13px] mt-1">
-              Lập ngày:{" "}
-              <span className="inline-block w-[30px] border-b border-black text-center">{data.ngay}</span>
-              {" "}tháng{" "}
-              <span className="inline-block w-[30px] border-b border-black text-center">{data.thang}</span>
-              {" "}năm{" "}
-              <span className="inline-block w-[40px] border-b border-black text-center">{data.nam}</span>
+            <p className="text-[13px] mt-1.5">
+              Lập ngày: {val(data.ngay, 6)} tháng {val(data.thang, 6)} năm {val(data.nam, 8)}
             </p>
           </div>
-          <div className="w-[100px]" />
+          <div className="w-[75px]" />
         </div>
 
         {/* Main body */}
-        <div className="flex mt-3 flex-1">
-          {/* Left fields */}
-          <div className="flex-1 pr-3">
-            {/* Đơn vị trả tiền */}
-            <div className="border-t border-l border-r border-black">
-              <div className="border-b border-black px-2 py-[5px] text-[13px]">
-                Đơn vị trả tiền: {val(data.donViTraTien, 50)}
-              </div>
-              <div className="border-b border-black px-2 py-[5px] text-[13px]">
-                Số tài khoản: {val(data.soTaiKhoanTra, 54)}
-              </div>
-              <div className="border-b border-black px-2 py-[5px] text-[13px]">
-                Tại NHPT tỉnh, TP: {val(data.taiNHPT, 46)}
-              </div>
+        <div className="flex mt-2">
+          {/* Left: all fields */}
+          <div className="flex-1 border border-black">
+            <div className="border-b border-black px-2 py-[4px]">
+              Đơn vị trả tiền: {val(data.donViTraTien, 55)}
             </div>
-
-            {/* Đơn vị nhận tiền */}
-            <div className="border-l border-r border-black mt-[-1px]">
-              <div className="border-b border-black px-2 py-[5px] text-[13px]">
-                Đơn vị nhận tiền: {val(data.donViNhanTien, 48)}
-              </div>
-              <div className="border-b border-black px-2 py-[5px] text-[13px]">
-                Số tài khoản: {val(data.soTaiKhoanNhan, 54)}
-              </div>
-              <div className="border-b border-black px-2 py-[5px] text-[13px]">
-                Tại NH, KB: {val(data.taiNHKB, 22)}{" "}, tỉnh, TP: {val(data.tinhTP, 20)}
-              </div>
+            <div className="border-b border-black px-2 py-[4px]">
+              Số tài khoản: {val(data.soTaiKhoanTra, 60)}
             </div>
-
-            {/* Số tiền & Nội dung */}
-            <div className="border-l border-r border-b border-black mt-[-1px]">
-              <div className="border-b border-black px-2 py-[5px] text-[13px]">
-                Số tiền bằng chữ: {val(data.soTienBangChu, 48)}
-              </div>
-              <div className="px-2 py-[5px] text-[13px]">
-                Nội dung thanh toán: {val(data.noiDungThanhToan, 44)}
-              </div>
+            <div className="border-b border-black px-2 py-[4px]">
+              Tại NHPT tỉnh, TP: {val(data.taiNHPT, 50)}
             </div>
-
-            {/* Signatures */}
-            <div className="flex mt-4">
-              {/* Đơn vị trả tiền */}
-              <div className="flex-1 pr-3">
-                <p className="font-bold text-[12px] text-center">Đơn vị trả tiền</p>
-                <div className="flex justify-around mt-1">
-                  <div className="text-center">
-                    <p className="font-bold text-[11px]">Kế toán trưởng</p>
-                    <p className="text-[9px] italic text-gray-500">(Ký tên)</p>
-                    <div className="h-[65px]" />
-                  </div>
-                  <div className="text-center">
-                    <p className="font-bold text-[11px]">Chủ tài khoản</p>
-                    <p className="text-[9px] italic text-gray-500">(Ký, đóng dấu)</p>
-                    <div className="h-[65px]" />
-                  </div>
-                </div>
-              </div>
-              {/* Ngân hàng Phát triển */}
-              <div className="flex-1 pl-3">
-                <p className="font-bold text-[12px] text-center">Ngân hàng Phát triển</p>
-                <div className="flex justify-around mt-1">
-                  <div className="text-center">
-                    <p className="font-bold text-[11px]">Kế toán</p>
-                    <p className="text-[9px] italic text-gray-500">(Ký tên)</p>
-                    <div className="h-[65px]" />
-                  </div>
-                  <div className="text-center">
-                    <p className="font-bold text-[11px]">Kế toán trưởng</p>
-                    <p className="text-[9px] italic text-gray-500">(Ký, đóng dấu)</p>
-                    <div className="h-[65px]" />
-                  </div>
-                </div>
-              </div>
+            <div className="border-b border-black px-2 py-[4px]">
+              Đơn vị nhận tiền: {val(data.donViNhanTien, 53)}
+            </div>
+            <div className="border-b border-black px-2 py-[4px]">
+              Số tài khoản: {val(data.soTaiKhoanNhan, 60)}
+            </div>
+            <div className="border-b border-black px-2 py-[4px]">
+              Tại NH, KB: {val(data.taiNHKB, 25)}{"  "},tỉnh, TP: {val(data.tinhTP, 20)}
+            </div>
+            <div className="border-b border-black px-2 py-[4px]">
+              Số tiền bằng chữ: {val(data.soTienBangChu, 53)}
+            </div>
+            <div className="px-2 py-[4px]">
+              Nội dung thanh toán: {val(data.noiDungThanhToan, 49)}
             </div>
           </div>
 
-          {/* Right boxes */}
-          <div className="w-[150px] space-y-0">
+          {/* Right: stacked boxes (no NH KBNN GHI for 42b) */}
+          <div className="w-[155px] border-t border-r border-b border-black ml-[-1px]">
             {/* NHPT GHI */}
-            <div className="border border-black p-2">
+            <div className="border-b border-black px-2 py-1.5">
               <p className="font-bold text-center text-[12px]">NHPT GHI</p>
-              <p className="text-center text-[11px] mt-1 mb-1">
-                {"·".repeat(5)}/{" "}{"·".repeat(5)}/{" "}{"·".repeat(5)}
+              <p className="text-center text-[11px] mt-0.5">
+                {"·".repeat(5)}/{"·".repeat(5)}/{"·".repeat(7)}
               </p>
-              <p className="text-[11px] mt-1">Nợ: {"·".repeat(18)}</p>
-              <p className="text-[11px] mt-1.5">Có: {"·".repeat(18)}</p>
+              <p className="text-[11px] mt-1">Nợ:{"·".repeat(20)}</p>
+              <p className="text-[11px] mt-0.5">Có:{"·".repeat(20)}</p>
             </div>
-
             {/* SỐ TIỀN BẰNG SỐ */}
-            <div className="border border-black border-t-0 p-2">
+            <div className="px-2 py-1.5">
               <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
-              <div className="mt-1 min-h-[28px] flex items-center justify-center">
-                <span className="text-[14px] font-bold">
-                  {data.soTienBangSo || <span className="text-gray-400">*{"·".repeat(16)}*</span>}
-                </span>
+              <p className="text-center text-[14px] font-bold mt-1 min-h-[22px]">
+                {data.soTienBangSo || <span className="text-gray-300">*{"·".repeat(16)}*</span>}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Signature section - with top border line */}
+        <div className="flex border-t border-black mt-[-1px]">
+          {/* Đơn vị trả tiền */}
+          <div className="flex-1 border-r border-black px-2 py-1.5">
+            <p className="font-bold text-[12px] text-center">Đơn vị trả tiền</p>
+            <div className="flex justify-around mt-0.5">
+              <div className="text-center">
+                <p className="font-bold text-[11px]">Kế toán trưởng</p>
+                <p className="text-[9px] italic text-gray-500">(Ký tên)</p>
+                <div className="h-[60px]" />
+              </div>
+              <div className="text-center">
+                <p className="font-bold text-[11px]">Chủ tài khoản</p>
+                <p className="text-[9px] italic text-gray-500">(Ký, đóng dấu)</p>
+                <div className="h-[60px]" />
+              </div>
+            </div>
+          </div>
+          {/* Ngân hàng Phát triển */}
+          <div className="flex-1 px-2 py-1.5">
+            <p className="font-bold text-[12px] text-center">Ngân hàng Phát triển</p>
+            <div className="flex justify-around mt-0.5">
+              <div className="text-center">
+                <p className="font-bold text-[11px]">Kế toán</p>
+                <p className="text-[9px] italic text-gray-500">(Ký tên)</p>
+                <div className="h-[60px]" />
+              </div>
+              <div className="text-center">
+                <p className="font-bold text-[11px]">Kế toán trưởng</p>
+                <p className="text-[9px] italic text-gray-500">(Ký, đóng dấu)</p>
+                <div className="h-[60px]" />
               </div>
             </div>
           </div>
