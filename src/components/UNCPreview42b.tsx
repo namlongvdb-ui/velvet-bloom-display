@@ -92,9 +92,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
               <p className="text-center text-[11px] mt-2">
                 {dots(6)}/{dots(6)}/{dots(10)}
               </p>
-            </div>
-            <div className="border-b border-black px-3 py-[8px]">
-              <p className="text-[11px]">Nợ:{dots(22)}</p>
+              <p className="text-[11px] mt-1.5">Nợ:{dots(22)}</p>
               <p className="text-[11px] mt-1.5">Có:{dots(22)}</p>
             </div>
             <div className="px-3 py-[4px]">
