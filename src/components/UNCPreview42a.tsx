@@ -39,7 +39,7 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
         {/* Title row: Logo + Title + Số UNC */}
         <div className="flex items-start -mt-1">
           <div className="w-[80px] flex items-center justify-center">
-            <img src={vdbLogo} alt="VDB" className="w-[65px] h-[65px] object-contain" />
+            <img src={vdbLogo} alt="VDB" className="w-[75px] h-[75px] object-contain" />
           </div>
           <div className="flex-1 text-center pt-0.5">
             <h1 className="text-[18px] font-bold tracking-[3px]">ỦY NHIỆM CHI</h1>
