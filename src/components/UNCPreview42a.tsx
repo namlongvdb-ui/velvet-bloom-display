@@ -77,11 +77,11 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
             </div>
             <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} noBorder />
             {/* Last row */}
-            <div className="px-2 py-[6px] flex items-baseline">
+            <div className="px-2 py-[6px]">
               <span className="whitespace-nowrap">Nội dung thanh toán:</span>
-              <span className="flex-1 min-w-0 break-words" style={{ 
+              <span className="break-words" style={{ 
                 borderBottom: data.noiDungThanhToan ? 'none' : '1px dotted black',
-                marginLeft: '2px', minHeight: '14px'
+                marginLeft: '2px', minHeight: '14px', lineHeight: '18px', wordBreak: 'break-word'
               }}>
                 {data.noiDungThanhToan && <span className="font-medium">{data.noiDungThanhToan}</span>}
               </span>
