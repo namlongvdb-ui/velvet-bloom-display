@@ -51,7 +51,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
         {/* Main body */}
         <div className="flex mt-2">
           {/* Left fields */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0 overflow-hidden">
             <Row label="Đơn vị trả tiền:" value={data.donViTraTien} noBorder />
             <Row label="Số tài khoản:" value={data.soTaiKhoanTra} noBorder />
             <Row label="Tại NHPT tỉnh, TP:" value={data.taiNHPT} />
