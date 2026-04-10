@@ -75,7 +75,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
           onClick={applyDefault42b}
           className="w-full rounded-md bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-colors"
         >
-          Điền mặc định (PGD Cao Bằng)
+          Mặc định (PGD Cao Bằng)
         </button>
       )}
       {/* Thông tin chung */}
