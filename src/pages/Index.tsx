@@ -25,7 +25,11 @@ const initialData: UNCFormData = {
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("42a");
-  const [data, setData] = useState<UNCFormData>(initialData);
+  const [data42a, setData42a] = useState<UNCFormData>(initialData);
+  const [data42b, setData42b] = useState<UNCFormData>(initialData);
+
+  const data = activeTab === "42a" ? data42a : data42b;
+  const setData = activeTab === "42a" ? setData42a : setData42b;
 
   const handlePrint = () => {
     window.print();
