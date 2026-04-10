@@ -43,33 +43,37 @@ const Index = () => {
     if (!previewRef.current) return;
     const el = previewRef.current;
 
-    // Clone element off-screen to avoid visual flash
+    // Clone element off-screen with explicit A4 dimensions
     const clone = el.cloneNode(true) as HTMLElement;
     clone.style.position = 'fixed';
     clone.style.left = '-9999px';
     clone.style.top = '0';
     clone.style.transform = 'none';
+    clone.style.width = '210mm';
+    clone.style.height = '297mm';
     clone.style.zIndex = '-1';
     document.body.appendChild(clone);
 
-    const canvas = await html2canvas(clone, {
-      scale: 3,
-      useCORS: true,
-      backgroundColor: "#ffffff",
-      logging: false,
-      windowWidth: clone.scrollWidth,
-      windowHeight: clone.scrollHeight,
-    });
+    try {
+      const canvas = await html2canvas(clone, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: "#ffffff",
+        logging: false,
+        width: clone.offsetWidth,
+        height: clone.offsetHeight,
+      });
 
-    document.body.removeChild(clone);
-
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = 210;
-    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
-    const fileName = `UNC_${activeTab === "42a" ? "C42a" : "C42b"}_${data.soUNC || "draft"}.pdf`;
-    pdf.save(fileName);
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pdfWidth = 210;
+      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
+      const fileName = `UNC_${activeTab === "42a" ? "C42a" : "C42b"}_${data.soUNC || "draft"}.pdf`;
+      pdf.save(fileName);
+    } finally {
+      document.body.removeChild(clone);
+    }
   };
 
   return (
