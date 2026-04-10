@@ -41,16 +41,29 @@ const Index = () => {
   const handleExportPDF = async () => {
     if (!previewRef.current) return;
     const el = previewRef.current;
+    
+    // Temporarily reset transform for accurate capture
+    const wrapper = el.parentElement;
+    const originalTransform = wrapper?.style.transform || '';
+    if (wrapper) wrapper.style.transform = 'none';
+    
     const canvas = await html2canvas(el, {
-      scale: 2,
+      scale: 3,
       useCORS: true,
       backgroundColor: "#ffffff",
+      logging: false,
+      windowWidth: el.scrollWidth,
+      windowHeight: el.scrollHeight,
     });
+    
+    // Restore transform
+    if (wrapper) wrapper.style.transform = originalTransform;
+    
     const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF("p", "mm", "a4");
     const pdfWidth = 210;
-    const pdfHeight = 297;
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
     const fileName = `UNC_${activeTab === "42a" ? "C42a" : "C42b"}_${data.soUNC || "draft"}.pdf`;
     pdf.save(fileName);
   };
