@@ -96,7 +96,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
               <p className="text-[11px] mt-1">Có:{dots(20)}</p>
             </div>
             <div className="px-2 py-[6px]">
-              <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
+              <p className="font-bold italic text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
               <p className="text-center text-[14px] font-bold mt-1 min-h-[22px]">
                 {data.soTienBangSo || <span>{dots(18)}</span>}
               </p>
