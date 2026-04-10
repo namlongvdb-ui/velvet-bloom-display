@@ -5,17 +5,22 @@ interface UNCPreview42aProps {
   data: UNCFormData;
 }
 
+const Dots = () => (
+  <span className="whitespace-nowrap overflow-hidden flex-1" style={{ letterSpacing: '1px' }}>
+    {".".repeat(200)}
+  </span>
+);
+
 const Row = ({ label, value, noBorder }: { label: string; value: string; noBorder?: boolean }) => (
-  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px]`}>
+  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex items-baseline`}>
     <span className="whitespace-nowrap">{label}</span>
-    <span className="break-words" style={{ 
-      marginLeft: '2px',
-      minHeight: '14px',
-      lineHeight: '18px',
-      wordBreak: 'break-word',
-    }}>
-      {value ? <span className="font-medium">{value}</span> : <span style={{ letterSpacing: '1px' }}>{".".repeat(50)}</span>}
-    </span>
+    {value ? (
+      <span className="break-words ml-[2px]" style={{ lineHeight: '18px', wordBreak: 'break-word' }}>
+        <span className="font-medium">{value}</span>
+      </span>
+    ) : (
+      <Dots />
+    )}
   </div>
 );
 
