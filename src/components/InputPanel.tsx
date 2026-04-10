@@ -70,15 +70,32 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
 
   return (
     <div className="space-y-5">
-      {activeTab === "42b" && (
+      <div className="flex gap-2">
+        {activeTab === "42b" && (
+          <button
+            type="button"
+            onClick={applyDefault42b}
+            className="flex-1 rounded-md bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-colors"
+          >
+            Mặc định (PGD Cao Bằng)
+          </button>
+        )}
         <button
           type="button"
-          onClick={applyDefault42b}
-          className="w-full rounded-md bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-colors"
+          onClick={() => {
+            const today = new Date();
+            onChange({
+              ...initialData,
+              ngay: String(today.getDate()).padStart(2, "0"),
+              thang: String(today.getMonth() + 1).padStart(2, "0"),
+              nam: String(today.getFullYear()),
+            });
+          }}
+          className={`${activeTab === "42b" ? "" : "w-full"} rounded-md bg-destructive text-destructive-foreground px-3 py-2 text-sm font-medium hover:bg-destructive/90 transition-colors`}
         >
-          Mặc định (PGD Cao Bằng)
+          New
         </button>
-      )}
+      </div>
       {/* Thông tin chung */}
       <div className="rounded-lg border border-border bg-card p-4 space-y-3">
         <h3 className="text-sm font-semibold text-primary uppercase tracking-wide">
