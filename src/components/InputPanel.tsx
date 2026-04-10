@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { numberToVietnameseWords } from "@/lib/numberToWords";
 
 export interface UNCFormData {
   soUNC: string;
@@ -134,7 +135,11 @@ const InputPanel = ({ data, onChange }: InputPanelProps) => {
         </h3>
         <div>
           <label className={labelClass}>Số tiền bằng số</label>
-          <input className={`${inputClass} text-lg font-bold`} placeholder="0" value={data.soTienBangSo} onChange={(e) => update("soTienBangSo", e.target.value)} />
+          <input className={`${inputClass} text-lg font-bold`} placeholder="0" value={data.soTienBangSo} onChange={(e) => {
+            const val = e.target.value;
+            update("soTienBangSo", val);
+            onChange({ ...data, soTienBangSo: val, soTienBangChu: numberToVietnameseWords(val) });
+          }} />
         </div>
         <div>
           <label className={labelClass}>Số tiền bằng chữ</label>
