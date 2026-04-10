@@ -95,7 +95,7 @@ const Index = () => {
                 Mẫu 42a - Doanh nghiệp
               </TabsTrigger>
               <TabsTrigger value="42b" className="text-primary-foreground/70 data-[state=active]:text-primary data-[state=active]:bg-primary-foreground">
-                Mẫu 42b - Nội bộ
+                Mẫu 42b - TT Nội bộ
               </TabsTrigger>
             </TabsList>
           </Tabs>
