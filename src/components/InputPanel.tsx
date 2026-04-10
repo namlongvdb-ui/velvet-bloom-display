@@ -38,6 +38,7 @@ const initialData: UNCFormData = {
 interface InputPanelProps {
   data: UNCFormData;
   onChange: (data: UNCFormData) => void;
+  activeTab?: string;
 }
 
 export const useUNCForm = () => {
@@ -48,7 +49,7 @@ export const useUNCForm = () => {
   return { data, update, setData };
 };
 
-const InputPanel = ({ data, onChange }: InputPanelProps) => {
+const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
   const update = (field: keyof UNCFormData, value: string) => {
     onChange({ ...data, [field]: value });
   };
@@ -57,8 +58,26 @@ const InputPanel = ({ data, onChange }: InputPanelProps) => {
     "w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
   const labelClass = "text-sm font-medium text-foreground mb-1 block";
 
+  const applyDefault42b = () => {
+    onChange({
+      ...data,
+      donViTraTien: "VDB-Chi nhánh KV Bắc Đông Bắc, PGD Cao Bằng",
+      soTaiKhoanTra: "203.519199.001.001",
+      taiNHPT: "VDB-Chi nhánh KV Bắc Đông Bắc, PGD Cao Bằng",
+    });
+  };
+
   return (
     <div className="space-y-5">
+      {activeTab === "42b" && (
+        <button
+          type="button"
+          onClick={applyDefault42b}
+          className="w-full rounded-md bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-colors"
+        >
+          Điền mặc định (PGD Cao Bằng)
+        </button>
+      )}
       {/* Thông tin chung */}
       <div className="rounded-lg border border-border bg-card p-4 space-y-3">
         <h3 className="text-sm font-semibold text-primary uppercase tracking-wide">
