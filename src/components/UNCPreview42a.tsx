@@ -12,11 +12,11 @@ const Dots = () => (
 );
 
 const Row = ({ label, value, noBorder }: { label: string; value: string; noBorder?: boolean }) => (
-  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex items-baseline`}>
-    <span className="whitespace-nowrap">{label}</span>
+  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex`}>
+    <span className="whitespace-nowrap flex-shrink-0">{label}</span>
     {value ? (
-      <span className="break-words ml-[2px]" style={{ lineHeight: '18px', wordBreak: 'break-word' }}>
-        <span className="font-medium">{value}</span>
+      <span className="ml-[2px] font-medium flex-1" style={{ lineHeight: '18px', wordBreak: 'break-word' }}>
+        {value}
       </span>
     ) : (
       <Dots />
