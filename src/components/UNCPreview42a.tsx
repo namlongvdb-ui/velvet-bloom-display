@@ -57,9 +57,31 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
         </div>
 
         {/* Main body */}
-        <div className="flex mt-2">
+        <div className="relative mt-2">
+          {/* Right panel - fixed size */}
+          <div className="absolute top-0 right-0 w-[155px] h-[220px] border border-black" style={{ zIndex: 1 }}>
+            <div className="border-b border-black px-2 py-[6px]">
+              <p className="font-bold text-center text-[12px]">NHPT GHI</p>
+              <p className="text-center text-[11px] mt-1">
+                {dots(5)}/{dots(5)}/{dots(7)}
+              </p>
+              <p className="text-[11px] mt-1.5">Nợ:{dots(20)}</p>
+              <p className="text-[11px] mt-1">Có:{dots(20)}</p>
+            </div>
+            <div className="border-b border-black px-2 py-[6px]">
+              <p className="font-bold text-center text-[12px]">NH (KBNN) GHI:</p>
+              <p className="text-[11px] mt-1.5">Nợ:{dots(20)}</p>
+              <p className="text-[11px] mt-1">Có:{dots(20)}</p>
+            </div>
+            <div className="px-2 py-[6px]">
+              <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
+              <p className="text-center text-[14px] font-bold mt-1 min-h-[22px]">
+                {data.soTienBangSo || <span>{dots(18)}</span>}
+              </p>
+            </div>
+          </div>
           {/* Left fields block */}
-          <div className="flex-1 min-w-0 overflow-hidden">
+          <div className="min-w-0 overflow-hidden" style={{ marginRight: '160px' }}>
             <Row label="Đơn vị trả tiền:" value={data.donViTraTien} noBorder />
             <Row label="Số tài khoản:" value={data.soTaiKhoanTra} noBorder />
             <Row label="Tại NHPT tỉnh, TP:" value={data.taiNHPT} />
@@ -94,29 +116,6 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
                   <Dots />
                 </div>
               )}
-            </div>
-          </div>
-
-          {/* Right panel */}
-          <div className="w-[155px] flex-shrink-0 border border-black">
-            <div className="border-b border-black px-2 py-[6px]">
-              <p className="font-bold text-center text-[12px]">NHPT GHI</p>
-              <p className="text-center text-[11px] mt-1">
-                {dots(5)}/{dots(5)}/{dots(7)}
-              </p>
-              <p className="text-[11px] mt-1.5">Nợ:{dots(20)}</p>
-              <p className="text-[11px] mt-1">Có:{dots(20)}</p>
-            </div>
-            <div className="border-b border-black px-2 py-[6px]">
-              <p className="font-bold text-center text-[12px]">NH (KBNN) GHI:</p>
-              <p className="text-[11px] mt-1.5">Nợ:{dots(20)}</p>
-              <p className="text-[11px] mt-1">Có:{dots(20)}</p>
-            </div>
-            <div className="px-2 py-[6px]">
-              <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
-              <p className="text-center text-[14px] font-bold mt-1 min-h-[22px]">
-                {data.soTienBangSo || <span>{dots(18)}</span>}
-              </p>
             </div>
           </div>
         </div>
