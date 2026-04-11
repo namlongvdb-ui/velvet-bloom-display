@@ -110,15 +110,23 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
           <input
             className={inputClass}
             placeholder="dd/mm/yyyy"
-            value={`${data.ngay}/${data.thang}/${data.nam}`}
+            value={(() => {
+              const digits = `${data.ngay}${data.thang}${data.nam}`;
+              if (!digits) return '';
+              let display = '';
+              for (let i = 0; i < digits.length; i++) {
+                if (i === 2 || i === 4) display += '/';
+                display += digits[i];
+              }
+              return display;
+            })()}
             onChange={(e) => {
-              const raw = e.target.value.replace(/[^0-9/]/g, '');
-              const parts = raw.split('/');
+              const digits = e.target.value.replace(/[^0-9]/g, '').slice(0, 8);
               onChange({
                 ...data,
-                ngay: parts[0]?.slice(0, 2) || '',
-                thang: parts[1]?.slice(0, 2) || '',
-                nam: parts[2]?.slice(0, 4) || '',
+                ngay: digits.slice(0, 2),
+                thang: digits.slice(2, 4),
+                nam: digits.slice(4, 8),
               });
             }}
           />
