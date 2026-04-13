@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { formatNumber } from "@/lib/numberToWords";
 import { numberToVietnameseWords } from "@/lib/numberToWords";
+import BeneficiarySelect from "./BeneficiarySelect";
 
 export interface UNCFormData {
   soUNC: string;
@@ -157,6 +158,23 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
         <h3 className="text-sm font-semibold text-primary uppercase tracking-wide">
           Đơn vị nhận tiền
         </h3>
+        {activeTab === "42b" && (
+          <BeneficiarySelect
+            currentName={data.donViNhanTien}
+            currentAccount={data.soTaiKhoanNhan}
+            currentBank={data.taiNHKB}
+            currentCity={data.tinhTP}
+            onSelect={(b) =>
+              onChange({
+                ...data,
+                donViNhanTien: b.name,
+                soTaiKhoanNhan: b.soTaiKhoan,
+                taiNHKB: b.taiNHKB,
+                tinhTP: b.tinhTP,
+              })
+            }
+          />
+        )}
         <div>
           <label className={labelClass}>Tên đơn vị</label>
           <input className={inputClass} placeholder="Nhập tên đơn vị nhận tiền..." value={data.donViNhanTien} onChange={(e) => update("donViNhanTien", e.target.value)} />
