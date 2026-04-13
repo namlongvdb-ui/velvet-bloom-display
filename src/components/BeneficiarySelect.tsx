@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, Users } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 
 export interface Beneficiary {
   id: string;
@@ -74,11 +81,11 @@ const BeneficiarySelect = ({
       <div className="flex items-center gap-2">
         <button
           type="button"
-          onClick={() => setOpen(!open)}
+          onClick={() => setOpen(true)}
           className={`${btnClass} flex items-center gap-1 bg-accent text-accent-foreground hover:bg-accent/80`}
         >
           <Users className="w-3.5 h-3.5" />
-          DS Thụ hưởng ({list.length})
+          DS đã lưu ({list.length})
         </button>
         <button
           type="button"
@@ -91,43 +98,52 @@ const BeneficiarySelect = ({
         </button>
       </div>
 
-      {open && (
-        <div className="rounded-lg border border-border bg-card max-h-[200px] overflow-y-auto">
-          {list.length === 0 ? (
-            <p className="text-xs text-muted-foreground p-3 text-center">
-              Chưa có người thụ hưởng nào
-            </p>
-          ) : (
-            list.map((b) => (
-              <div
-                key={b.id}
-                className="flex items-center gap-2 px-3 py-2 hover:bg-muted/50 cursor-pointer border-b border-border last:border-b-0"
-                onClick={() => {
-                  onSelect(b);
-                  setOpen(false);
-                }}
-              >
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">{b.name}</p>
-                  <p className="text-xs text-muted-foreground truncate">
-                    TK: {b.soTaiKhoan} — {b.taiNHKB}{b.tinhTP ? `, ${b.tinhTP}` : ""}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDelete(b.id);
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent side="right" className="w-[320px] sm:w-[380px] p-0">
+          <SheetHeader className="p-4 pb-2 border-b border-border">
+            <SheetTitle className="text-base">Danh sách thụ hưởng</SheetTitle>
+            <SheetDescription className="text-xs">
+              Chọn đơn vị để tự động điền thông tin
+            </SheetDescription>
+          </SheetHeader>
+          <div className="p-3 space-y-2 overflow-y-auto max-h-[calc(100vh-120px)]">
+            {list.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                Chưa có đơn vị thụ hưởng nào được lưu
+              </p>
+            ) : (
+              list.map((b) => (
+                <div
+                  key={b.id}
+                  className="group relative rounded-lg border border-border bg-card p-3 cursor-pointer hover:border-primary/50 hover:shadow-sm transition-all"
+                  onClick={() => {
+                    onSelect(b);
+                    setOpen(false);
                   }}
-                  className="text-destructive hover:text-destructive/80 p-1"
                 >
-                  <Trash2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            ))
-          )}
-        </div>
-      )}
+                  <p className="text-sm font-semibold truncate pr-8">{b.name}</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    TK: {b.soTaiKhoan}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {b.taiNHKB}{b.tinhTP ? ` — ${b.tinhTP}` : ""}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDelete(b.id);
+                    }}
+                    className="absolute top-3 right-3 p-1 rounded text-destructive opacity-0 group-hover:opacity-100 hover:bg-destructive/10 transition-opacity"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };
