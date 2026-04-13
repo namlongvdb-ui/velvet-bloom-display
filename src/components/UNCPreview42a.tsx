@@ -34,7 +34,7 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
   return (
     <div
       className="w-[210mm] h-[297mm] bg-white text-black mx-auto shadow-lg print:shadow-none"
-      style={{ fontFamily: "'Times New Roman', serif", fontSize: "13px" }}
+      style={{ fontFamily: "'Times New Roman', serif", fontSize: "14.5px" }}
     >
       <div className="px-[15mm] py-[10mm] h-full flex flex-col">
         {/* Mẫu số */}
