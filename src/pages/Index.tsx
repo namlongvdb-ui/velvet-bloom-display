@@ -77,7 +77,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-muted print:bg-white print:p-0">
+    <div className="h-screen overflow-hidden bg-muted print:bg-white print:p-0 print:h-auto print:overflow-visible">
       {/* Header */}
       <header className="bg-primary text-primary-foreground px-6 py-3 flex flex-col items-center print:hidden">
         <div className="text-center">
