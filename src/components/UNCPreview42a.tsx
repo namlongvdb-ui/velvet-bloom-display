@@ -1,4 +1,5 @@
-import vdbLogo from "@/assets/vdb-logo.jpg";
+import vdbLogo from "@/assets/vdb-logo.png";
+import vdbWatermark from "@/assets/vdb-watermark.png";
 import { formatNumber } from "@/lib/numberToWords";
 import type { UNCFormData } from "./InputPanel";
 
@@ -33,23 +34,28 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
 
   return (
     <div
-      className="w-[210mm] h-[297mm] bg-white text-black mx-auto shadow-lg print:shadow-none"
-      style={{ fontFamily: "'Times New Roman', serif", fontSize: "14.5px" }}
+      className="w-[210mm] h-[297mm] bg-white text-black mx-auto shadow-lg print:shadow-none relative overflow-hidden"
+      style={{ fontFamily: "'Times New Roman', serif", fontSize: "13px" }}
     >
-      <div className="px-[15mm] py-[10mm] h-full flex flex-col">
-        {/* Mẫu số */}
+      <img
+        src={vdbWatermark}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute left-1/2 -translate-x-1/2 w-[140mm] h-[140mm] object-contain opacity-10"
+        style={{ top: '25mm' }}
+      />
+      <div className="relative px-[15mm] py-[10mm] h-full flex flex-col">
         <div className="text-right text-[11px] italic">Mẫu số: C42a-NHPT</div>
 
-        {/* Title row: Logo + Title + Số UNC */}
         <div className="flex items-start -mt-1">
-          <div className="w-[80px] ml-[5mm] flex items-center justify-center">
-            <img src={vdbLogo} alt="VDB" className="w-[80px] h-[80px] object-contain" />
+          <div className="w-[180px] ml-[5mm] flex items-start justify-center -mt-8" style={{ marginTop: 'calc(-2rem - 10mm)' }}>
+            <img src={vdbLogo} alt="VDB" className="w-[180px] h-[180px] object-contain" />
           </div>
           <div className="flex-1 text-center pt-0.5">
             <h1 className="text-[18px] font-bold tracking-[3px]">ỦY NHIỆM CHI</h1>
             <p className="text-[13px] mt-0.5">Chuyển khoản, chuyển tiền thư, điện</p>
             <p className="text-[13px] mt-1">
-              Lập ngày: <span className="inline-block w-[40px] border-b border-dotted border-black text-center">{data.ngay}</span> tháng <span className="inline-block w-[40px] border-b border-dotted border-black text-center">{data.thang}</span> năm <span className="inline-block w-[50px] border-b border-dotted border-black text-center">{data.nam}</span>
+              Lập ngày: <span className="inline-block w-[40px] text-center">{data.ngay}</span> tháng <span className="inline-block w-[40px] text-center">{data.thang}</span> năm <span className="inline-block w-[50px] text-center">{data.nam}</span>
             </p>
           </div>
           <div className="text-[13px] pt-1 w-[130px] text-right">
@@ -57,9 +63,7 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
           </div>
         </div>
 
-        {/* Main body */}
         <div className="relative mt-2">
-          {/* Right panel - fixed size */}
           <div className="absolute top-0 right-0 w-[155px] h-[270px] border border-black flex flex-col" style={{ zIndex: 1 }}>
             <div className="border-b border-black px-2 py-[6px] flex-1 flex flex-col justify-center">
               <p className="font-bold text-center text-[12px]">NHPT GHI</p>
@@ -81,14 +85,12 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
               </p>
             </div>
           </div>
-          {/* Left fields block */}
           <div className="min-w-0 overflow-hidden" style={{ marginRight: '160px' }}>
             <Row label="Đơn vị trả tiền:" value={data.donViTraTien} noBorder />
             <Row label="Số tài khoản:" value={data.soTaiKhoanTra} noBorder />
             <Row label="Tại NHPT tỉnh, TP:" value={data.taiNHPT} />
             <Row label="Đơn vị nhận tiền:" value={data.donViNhanTien} noBorder />
             <Row label="Số tài khoản:" value={data.soTaiKhoanNhan} noBorder />
-            {/* Special row with 2 fields */}
             <div className="border-b border-black px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Tại NH, KB:</span>
               {data.taiNHKB ? (
@@ -104,7 +106,6 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
               )}
             </div>
             <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} noBorder />
-            {/* Last row */}
             <div className="px-2 py-[6px]">
               {data.noiDungThanhToan ? (
                 <div style={{ lineHeight: '18px', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
@@ -121,7 +122,6 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
           </div>
         </div>
 
-        {/* Signature row 1 */}
         <div className="flex mt-6">
           <div className="flex-1 border-r border-black py-2 px-2">
             <p className="font-bold text-[12px] text-center">Đơn vị trả tiền</p>
@@ -160,7 +160,6 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
           </div>
         </div>
 
-        {/* NH KBNN A + B */}
         <div className="flex mt-8">
           <div className="flex-1">
             <p className="font-bold text-[11px] text-center">NH, (KBNN) A ghi sổ ngày {dots(8)}</p>
