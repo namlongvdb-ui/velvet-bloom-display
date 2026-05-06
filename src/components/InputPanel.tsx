@@ -210,6 +210,15 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
         <div>
           <label className={labelClass}>Số tiền bằng chữ</label>
           <input className={inputClass} placeholder="Nhập số tiền bằng chữ..." value={data.soTienBangChu} onChange={(e) => update("soTienBangChu", e.target.value)} />
+           <label className="flex items-center gap-2 text-sm text-foreground cursor-pointer select-none">
+            <input
+              type="checkbox"
+              className="h-4 w-4 rounded border-input"
+              checked={!!data.themDongTrong}
+              onChange={(e) => onChange({ ...data, themDongTrong: e.target.checked })}
+            />
+            Chèn thêm 1 dòng trống (...) bên dưới
+          </label>
         </div>
         <div>
           <label className={labelClass}>Nội dung thanh toán</label>
@@ -219,7 +228,17 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
             value={data.noiDungThanhToan}
             onChange={(e) => update("noiDungThanhToan", e.target.value)}
           />
+           <label className="flex items-center gap-2 text-sm text-foreground cursor-pointer select-none">
+            <input
+              type="checkbox"
+              className="h-4 w-4 rounded border-input"
+              checked={!!data.themDongTrong}
+              onChange={(e) => onChange({ ...data, themDongTrong: e.target.checked })}
+            />
+            Chèn thêm 1 dòng trống (...) bên dưới
+          </label>
         </div>
+       
       </div>
     </div>
   );
